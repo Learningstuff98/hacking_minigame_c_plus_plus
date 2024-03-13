@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Game.h"
 
 std::string get_desired_operation() {
   std::cout << "Please select one of the following options:" << std::endl;
@@ -13,7 +14,8 @@ int main() {
   std::string desired_operation {get_desired_operation()};
   while(desired_operation != "exit") {
     if(desired_operation == "start") {
-      std::cout << "START MATCH STUFF GOES HERE." << std::endl;
+      Game new_game {};
+      new_game.say_hello();
       desired_operation = get_desired_operation();
     } else {
       std::cout << "ERROR! ERROR! INVALID SELECTION!" << std::endl;
