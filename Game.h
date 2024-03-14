@@ -3,7 +3,7 @@
 
 class Game {
   public:
-    void say_hello();
+    void say_words();
 };
 
 #endif
