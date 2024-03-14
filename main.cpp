@@ -15,7 +15,7 @@ int main() {
   while(desired_operation != "exit") {
     if(desired_operation == "start") {
       Game new_game {};
-      new_game.say_words();
+      new_game.print_random_words();
       desired_operation = get_desired_operation();
     } else {
       std::cout << "ERROR! ERROR! INVALID SELECTION!" << std::endl;
