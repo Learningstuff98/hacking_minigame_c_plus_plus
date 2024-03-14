@@ -25,6 +25,15 @@ std::string Game::possible_words [18] {
   "door"
 };
 
+std::vector<std::string> Game::random_words {};
+
+Game::Game() {
+  random_words = get_random_words();
+  for(auto const &random_word: random_words) {
+    std::cout << random_word << std::endl;
+  }
+};
+
 int Game::generate_random_number() {
   // https://www.reddit.com/r/learnprogramming/comments/5uu9eu/generating_random_number_in_c/
   // https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution

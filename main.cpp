@@ -15,9 +15,6 @@ int main() {
   while(desired_operation != "exit") {
     if(desired_operation == "start") {
       Game new_game {};
-      for(auto const &random_word: new_game.get_random_words()) {
-        std::cout << random_word << std::endl;
-      }
       desired_operation = get_desired_operation();
     } else {
       std::cout << "ERROR! ERROR! INVALID SELECTION!" << std::endl;
