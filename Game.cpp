@@ -1,5 +1,7 @@
 #include <iostream>
 #include <random>
+#include <algorithm>
+#include <vector>
 #include "Game.h"
 
 std::string Game::possible_words [18] {
@@ -33,9 +35,19 @@ int Game::generate_random_number() {
   return dist(mt);
 };
 
-void Game::print_random_words () {
-  // Shouldn't print the same word more than once
-  for(size_t i {1}; i <= 5; i++) {
-    std::cout << possible_words[generate_random_number()] << std::endl;
+std::vector<std::string> Game::get_random_words () {
+  std::vector<int> random_indexes{};
+  int i {1};
+  while(i <= 5) {
+    int new_random_number {generate_random_number()};
+    if(std::count(random_indexes.cbegin(), random_indexes.cend(), new_random_number) == 0) {
+      random_indexes.push_back(new_random_number);
+      i++;
+    }
   }
+  std::vector<std::string> random_words {};
+  for(auto &random_index: random_indexes) {
+    random_words.push_back(possible_words[random_index]);
+  }
+  return random_words;
 };
