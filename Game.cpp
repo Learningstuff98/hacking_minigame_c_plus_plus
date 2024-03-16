@@ -4,8 +4,6 @@
 #include <vector>
 #include "Game.h"
 
-// data members
-
 std::string Game::possible_words [18] {
   "four",
   "five",
@@ -54,21 +52,28 @@ char Game::characters [22] {
 
 std::vector<std::string> Game::random_words {};
 
-// member methods
-
 Game::Game() {
   random_words = get_random_words();
-  // need two grids, each 12 wide by 17 tall
-  render_grid();
+  render_text_walls();
 };
 
-void Game::render_grid() {
+void Game::render_text_walls() {
+  std::cout << "-------------------------------";
+  std::cout << std::endl;
   for(size_t height {1}; height <= 17; height++) {
+    std::cout << "| ";
     for(size_t width {1}; width <= 12; width++) {
       std::cout << characters[width];
     }
+    std::cout << " | ";
+    for(size_t width {1}; width <= 12; width++) {
+      std::cout << characters[width];
+    }
+    std::cout << " |";
     std::cout << std::endl;
   }
+  std::cout << "-------------------------------";
+  std::cout << std::endl;
 };
 
 int Game::generate_random_number() {
