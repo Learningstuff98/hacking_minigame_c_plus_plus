@@ -6,7 +6,7 @@ class Game {
   static std::string possible_words [18];
   static std::vector<std::string> random_words;
   static char characters [22];
-  int generate_random_number();
+  int generate_random_number(int distribution_end);
   void render_text_walls();
 
   public:

@@ -63,11 +63,11 @@ void Game::render_text_walls() {
   for(size_t height {1}; height <= 17; height++) {
     std::cout << "| ";
     for(size_t width {1}; width <= 12; width++) {
-      std::cout << characters[width];
+      std::cout << characters[generate_random_number(21)];
     }
     std::cout << " | ";
     for(size_t width {1}; width <= 12; width++) {
-      std::cout << characters[width];
+      std::cout << characters[generate_random_number(21)];
     }
     std::cout << " |";
     std::cout << std::endl;
@@ -76,13 +76,13 @@ void Game::render_text_walls() {
   std::cout << std::endl;
 };
 
-int Game::generate_random_number() {
+int Game::generate_random_number(int distribution_end) {
   // https://www.reddit.com/r/learnprogramming/comments/5uu9eu/generating_random_number_in_c/
   // https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
 
   std::random_device rd;
   std::mt19937 mt(rd());
-  std::uniform_int_distribution<int> dist(0, 17);
+  std::uniform_int_distribution<int> dist(0, distribution_end);
   return dist(mt);
 };
 
@@ -90,7 +90,7 @@ std::vector<std::string> Game::get_random_words () {
   std::vector<int> random_indexes{};
   int i {1};
   while(i <= 5) {
-    int new_random_number {generate_random_number()};
+    int new_random_number {generate_random_number(17)};
     if(std::count(random_indexes.cbegin(), random_indexes.cend(), new_random_number) == 0) {
       random_indexes.push_back(new_random_number);
       i++;
