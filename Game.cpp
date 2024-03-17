@@ -52,28 +52,43 @@ char Game::characters [22] {
 
 std::vector<std::string> Game::random_words {};
 
+std::string text_walls {""};
+
 Game::Game() {
   random_words = get_random_words();
-  render_text_walls();
+  text_walls = set_text_walls();
+  std::cout << text_walls;
 };
 
-void Game::render_text_walls() {
-  std::cout << "-------------------------------";
-  std::cout << std::endl;
+void Game::add_text(std::string &text, std::string &result) {
+  for(auto &text_char: text) {
+    result.push_back(text_char);
+  };
+};
+
+std::string Game::set_text_walls() {
+  std::string result {""};
+  std::string dash_line {"-------------------------------"};
+  add_text(dash_line, result);
+  result.push_back('\n');
   for(size_t height {1}; height <= 17; height++) {
-    std::cout << "| ";
+    std::string leading_pipe {"| "};
+    add_text(leading_pipe, result);
     for(size_t width {1}; width <= 12; width++) {
-      std::cout << characters[generate_random_number(21)];
+      result.push_back(characters[generate_random_number(21)]);
     }
-    std::cout << " | ";
+    std::string middle_pipe {" | "};
+    add_text(middle_pipe, result);
     for(size_t width {1}; width <= 12; width++) {
-      std::cout << characters[generate_random_number(21)];
+      result.push_back(characters[generate_random_number(21)]);
     }
-    std::cout << " |";
-    std::cout << std::endl;
+    std::string ending_pipe {" |"};
+    add_text(ending_pipe, result);
+    result.push_back('\n');
   }
-  std::cout << "-------------------------------";
-  std::cout << std::endl;
+  add_text(dash_line, result);
+  result.push_back('\n');
+  return result;
 };
 
 int Game::generate_random_number(int distribution_end) {
