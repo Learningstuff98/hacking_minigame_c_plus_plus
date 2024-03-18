@@ -79,8 +79,11 @@ std::string Game::set_text_walls() {
       if(x == 1 && y == 1) {
         add_text(random_words[0], result);
         x += 4;
-      } else if(x == 9 && y == 2) {
+      } else if(x == 3 && y == 10) {
         add_text(random_words[1], result);
+        x += 4;
+      } else if(x == 9 && y == 14) {
+        add_text(random_words[2], result);
         x += 4;
       } else {
         result.push_back(characters[generate_random_number(21)]);
@@ -90,14 +93,14 @@ std::string Game::set_text_walls() {
     std::string middle_pipe {" | "};
     add_text(middle_pipe, result);
     while(x <= 24) {
-      if(x == 13 && y == 1) {
-        add_text(random_words[2], result);
-        x += 4;
-      } else if(x == 21 && y == 2) {
+      if(x == 13 && y == 3) {
         add_text(random_words[3], result);
         x += 4;
-      } else if(x == 16 && y == 3) {
+      } else if(x == 21 && y == 7) {
         add_text(random_words[4], result);
+        x += 4;
+      } else if(x == 16 && y == 16) {
+        add_text(random_words[5], result);
         x += 4;
       } else {
         result.push_back(characters[generate_random_number(21)]);
@@ -126,7 +129,7 @@ int Game::generate_random_number(int distribution_end) {
 std::vector<std::string> Game::get_random_words () {
   std::vector<int> random_indexes{};
   int i {1};
-  while(i <= 5) {
+  while(i <= 6) {
     int new_random_number {generate_random_number(17)};
     if(std::count(random_indexes.cbegin(), random_indexes.cend(), new_random_number) == 0) {
       random_indexes.push_back(new_random_number);
