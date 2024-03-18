@@ -71,16 +71,38 @@ std::string Game::set_text_walls() {
   std::string dash_line {"-------------------------------"};
   add_text(dash_line, result);
   result.push_back('\n');
-  for(size_t height {1}; height <= 17; height++) {
+  for(size_t y {1}; y <= 17; y++) {
     std::string leading_pipe {"| "};
     add_text(leading_pipe, result);
-    for(size_t width {1}; width <= 12; width++) {
-      result.push_back(characters[generate_random_number(21)]);
+    size_t x {1};
+    while(x <= 12) {
+      if(x == 1 && y == 1) {
+        add_text(random_words[0], result);
+        x += 4;
+      } else if(x == 9 && y == 2) {
+        add_text(random_words[1], result);
+        x += 4;
+      } else {
+        result.push_back(characters[generate_random_number(21)]);
+        x++;
+      }
     }
     std::string middle_pipe {" | "};
     add_text(middle_pipe, result);
-    for(size_t width {1}; width <= 12; width++) {
-      result.push_back(characters[generate_random_number(21)]);
+    while(x <= 24) {
+      if(x == 13 && y == 1) {
+        add_text(random_words[2], result);
+        x += 4;
+      } else if(x == 21 && y == 2) {
+        add_text(random_words[3], result);
+        x += 4;
+      } else if(x == 16 && y == 3) {
+        add_text(random_words[4], result);
+        x += 4;
+      } else {
+        result.push_back(characters[generate_random_number(21)]);
+        x++;
+      }
     }
     std::string ending_pipe {" |"};
     add_text(ending_pipe, result);
