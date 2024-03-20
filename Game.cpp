@@ -5,24 +5,24 @@
 #include "Game.h"
 
 std::string Game::possible_words [18] {
-  "four",
-  "five",
-  "nine",
-  "fuzz",
-  "quiz",
-  "buzz",
-  "stop",
-  "rain",
-  "cane",
-  "joke",
-  "cozy",
-  "walk",
-  "talk",
-  "zinc",
-  "fame",
-  "slam",
-  "dumb",
-  "door"
+  "FOUR",
+  "FIVE",
+  "NINE",
+  "FUZZ",
+  "QUIZ",
+  "BUZZ",
+  "STOP",
+  "RAIN",
+  "CANE",
+  "JOKE",
+  "COZY",
+  "WALK",
+  "TALK",
+  "ZINC",
+  "FAME",
+  "SLAM",
+  "DUMB",
+  "DOOR"
 };
 
 char Game::characters [22] {
@@ -54,6 +54,11 @@ std::vector<std::string> Game::random_words {};
 
 std::string text_walls {""};
 
+int possible_word_coordinates [2][6][2] { // consider shortening this name. Add more coordinate lists
+  { {1, 1}, {3, 10}, {9, 14}, {13, 8}, {21, 7}, {16, 16} },
+  { {3, 3}, {6, 6}, {8, 17}, {13, 1}, {14, 9}, {21, 17} }
+};
+
 Game::Game() {
   random_words = get_random_words();
   text_walls = set_text_walls();
@@ -68,21 +73,22 @@ void Game::add_text(std::string &text, std::string &result) {
 
 std::string Game::set_text_walls() {
   std::string result {""};
+  int coordinate_list {generate_random_number(1)};
   std::string dash_line {"-------------------------------"};
   add_text(dash_line, result);
   result.push_back('\n');
-  for(size_t y {1}; y <= 17; y++) {
+  for(int y {1}; y <= 17; y++) {
     std::string leading_pipe {"| "};
     add_text(leading_pipe, result);
-    size_t x {1};
+    int x {1};
     while(x <= 12) {
-      if(x == 1 && y == 1) {
+      if(x == possible_word_coordinates[coordinate_list][0][0] && y == possible_word_coordinates[coordinate_list][0][1]) {
         add_text(random_words[0], result);
         x += 4;
-      } else if(x == 3 && y == 10) {
+      } else if(x == possible_word_coordinates[coordinate_list][1][0] && y == possible_word_coordinates[coordinate_list][1][1]) {
         add_text(random_words[1], result);
         x += 4;
-      } else if(x == 9 && y == 14) {
+      } else if(x == possible_word_coordinates[coordinate_list][2][0] && y == possible_word_coordinates[coordinate_list][2][1]) {
         add_text(random_words[2], result);
         x += 4;
       } else {
@@ -93,13 +99,13 @@ std::string Game::set_text_walls() {
     std::string middle_pipe {" | "};
     add_text(middle_pipe, result);
     while(x <= 24) {
-      if(x == 13 && y == 3) {
+      if(x == possible_word_coordinates[coordinate_list][3][0] && y == possible_word_coordinates[coordinate_list][3][1]) {
         add_text(random_words[3], result);
         x += 4;
-      } else if(x == 21 && y == 7) {
+      } else if(x == possible_word_coordinates[coordinate_list][4][0] && y == possible_word_coordinates[coordinate_list][4][1]) {
         add_text(random_words[4], result);
         x += 4;
-      } else if(x == 16 && y == 16) {
+      } else if(x == possible_word_coordinates[coordinate_list][5][0] && y == possible_word_coordinates[coordinate_list][5][1]) {
         add_text(random_words[5], result);
         x += 4;
       } else {
