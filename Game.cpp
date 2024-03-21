@@ -54,7 +54,7 @@ std::vector<std::string> Game::random_words {};
 
 std::string text_walls {""};
 
-int possible_word_coordinates [2][6][2] { // consider shortening this name. Add more coordinate lists
+int possible_word_coordinates [2][6][2] {
   { {1, 1}, {3, 10}, {9, 14}, {13, 8}, {21, 7}, {16, 16} },
   { {3, 3}, {6, 6}, {8, 17}, {13, 1}, {14, 9}, {21, 17} }
 };
@@ -73,7 +73,7 @@ void Game::add_text(std::string &text, std::string &result) {
 
 std::string Game::set_text_walls() {
   std::string result {""};
-  int coordinate_list {generate_random_number(1)};
+  auto coordinate_list {possible_word_coordinates[generate_random_number(1)]};
   std::string dash_line {"-------------------------------"};
   add_text(dash_line, result);
   result.push_back('\n');
@@ -82,13 +82,13 @@ std::string Game::set_text_walls() {
     add_text(leading_pipe, result);
     int x {1};
     while(x <= 12) {
-      if(x == possible_word_coordinates[coordinate_list][0][0] && y == possible_word_coordinates[coordinate_list][0][1]) {
+      if(x == coordinate_list[0][0] && y == coordinate_list[0][1]) {
         add_text(random_words[0], result);
         x += 4;
-      } else if(x == possible_word_coordinates[coordinate_list][1][0] && y == possible_word_coordinates[coordinate_list][1][1]) {
+      } else if(x == coordinate_list[1][0] && y == coordinate_list[1][1]) {
         add_text(random_words[1], result);
         x += 4;
-      } else if(x == possible_word_coordinates[coordinate_list][2][0] && y == possible_word_coordinates[coordinate_list][2][1]) {
+      } else if(x == coordinate_list[2][0] && y == coordinate_list[2][1]) {
         add_text(random_words[2], result);
         x += 4;
       } else {
@@ -99,13 +99,13 @@ std::string Game::set_text_walls() {
     std::string middle_pipe {" | "};
     add_text(middle_pipe, result);
     while(x <= 24) {
-      if(x == possible_word_coordinates[coordinate_list][3][0] && y == possible_word_coordinates[coordinate_list][3][1]) {
+      if(x == coordinate_list[3][0] && y == coordinate_list[3][1]) {
         add_text(random_words[3], result);
         x += 4;
-      } else if(x == possible_word_coordinates[coordinate_list][4][0] && y == possible_word_coordinates[coordinate_list][4][1]) {
+      } else if(x == coordinate_list[4][0] && y == coordinate_list[4][1]) {
         add_text(random_words[4], result);
         x += 4;
-      } else if(x == possible_word_coordinates[coordinate_list][5][0] && y == possible_word_coordinates[coordinate_list][5][1]) {
+      } else if(x == coordinate_list[5][0] && y == coordinate_list[5][1]) {
         add_text(random_words[5], result);
         x += 4;
       } else {
