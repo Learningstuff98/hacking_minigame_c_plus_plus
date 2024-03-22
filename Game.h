@@ -6,11 +6,7 @@ class Game {
   static std::string possible_words [18];
   static std::vector<std::string> random_words;
   static char characters [22];
-  int possible_word_coordinates [3][6][2] {
-    { {1, 1}, {3, 10}, {9, 14}, {13, 8}, {21, 7}, {16, 16} },
-    { {3, 3}, {6, 6}, {8, 17}, {13, 1}, {14, 9}, {21, 17} },
-    { {1, 10}, {3, 12}, {2, 15}, {15, 3}, {13, 5}, {14, 6} }
-  };
+  int possible_word_coordinates [3][6][2];
   std::string text_walls;
   std::string set_text_walls();
   void add_text(std::string &text, std::string &result);

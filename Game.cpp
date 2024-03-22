@@ -52,13 +52,12 @@ char Game::characters [22] {
 
 std::vector<std::string> Game::random_words {};
 
-int possible_word_coordinates [3][6][2] {
-  { {1, 1}, {3, 10}, {9, 14}, {13, 8}, {21, 7}, {16, 16} },
-  { {3, 3}, {6, 6}, {8, 17}, {13, 1}, {14, 9}, {21, 17} },
-  { {1, 10}, {3, 12}, {2, 15}, {15, 3}, {13, 5}, {14, 6} }
-};
-
-Game::Game() {
+Game::Game()
+  : possible_word_coordinates {
+    { {1, 1}, {3, 10}, {9, 14}, {13, 8}, {21, 7}, {16, 16} },
+    { {3, 3}, {6, 6}, {8, 17}, {13, 1}, {14, 9}, {21, 17} },
+    { {1, 10}, {3, 12}, {2, 15}, {15, 3}, {13, 5}, {14, 6} }
+  } {
   random_words = get_random_words();
   text_walls = set_text_walls();
   std::cout << text_walls;
