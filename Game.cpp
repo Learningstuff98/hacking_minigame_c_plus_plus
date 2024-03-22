@@ -4,8 +4,6 @@
 #include <vector>
 #include "Game.h"
 
-std::vector<std::string> Game::random_words {};
-
 Game::Game()
   : possible_word_coordinates {
     { {1, 1}, {3, 10}, {9, 14}, {13, 8}, {21, 7}, {16, 16} },
