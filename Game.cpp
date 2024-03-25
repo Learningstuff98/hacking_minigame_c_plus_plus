@@ -22,7 +22,7 @@ Game::Game()
   std::cout << text_walls;
 };
 
-void Game::add_text(std::string &text, std::string &result) {
+void Game::add_text(const std::string &text, std::string &result) {
   for(auto &text_char: text) {
     result.push_back(text_char);
   };
@@ -79,7 +79,7 @@ std::string Game::set_text_walls() {
   return result;
 };
 
-int Game::generate_random_number(int distribution_end) {
+int Game::generate_random_number(const int distribution_end) {
   // https://www.reddit.com/r/learnprogramming/comments/5uu9eu/generating_random_number_in_c/
   // https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
 
@@ -89,19 +89,15 @@ int Game::generate_random_number(int distribution_end) {
   return dist(mt);
 };
 
-std::vector<std::string> Game::get_random_words () {
-  std::vector<int> random_indexes{};
+std::vector<std::string> Game::get_random_words() {
+  std::vector<std::string> random_words {};
   int i {1};
   while(i <= 6) {
-    int new_random_number {generate_random_number(17)};
-    if(std::count(random_indexes.cbegin(), random_indexes.cend(), new_random_number) == 0) {
-      random_indexes.push_back(new_random_number);
+    std::string new_random_word {possible_words[generate_random_number(17)]};
+    if(std::count(random_words.cbegin(), random_words.cend(), new_random_word) == 0) {
+      random_words.push_back(new_random_word);
       i++;
     }
-  }
-  std::vector<std::string> random_words {};
-  for(auto &random_index: random_indexes) {
-    random_words.push_back(possible_words[random_index]);
   }
   return random_words;
 };

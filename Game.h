@@ -9,8 +9,8 @@ class Game {
   std::string possible_words [18];
   std::string text_walls;
   std::string set_text_walls();
-  void add_text(std::string &text, std::string &result);
-  int generate_random_number(int distribution_end);
+  void add_text(const std::string &text, std::string &result);
+  int generate_random_number(const int distribution_end);
   std::vector<std::string> get_random_words();
 
   public:
