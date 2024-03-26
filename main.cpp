@@ -2,7 +2,7 @@
 #include "Game.h"
 
 std::string get_desired_operation() {
-  std::cout << "Please select one of the following options:" << std::endl;
+  std::cout << "Welcome to the main menu. Please select one of the following options:" << std::endl;
   std::cout << "start or exit." << std::endl;
   std::string desired_operation {""};
   std::cin >> desired_operation;

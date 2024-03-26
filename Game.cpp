@@ -20,7 +20,27 @@ Game::Game()
   random_words = get_random_words();
   text_walls = set_text_walls();
   std::cout << text_walls;
+  std::string game_input {get_game_input()};
+  while(game_input != "exit") {
+    if(std::count(random_words.cbegin(), random_words.cend(), game_input) == 1) {
+      std::cout << text_walls << std::endl;
+      std::cout << game_input << " is a valid word for entry." << std::endl;
+      game_input = get_game_input();
+    } else {
+      std::cout << text_walls << std::endl;
+      std::cout << "ERROR! ERROR! INVALID SELECTION!" << std::endl;
+      game_input = get_game_input();
+    }
+  }
+  std::cout << "Ending game and returning to the main menu." << std::endl;
 };
+
+std::string Game::get_game_input() {
+  std::cout << "Please enter a word, or exit to go back to the main menu." << std::endl;
+  std::string game_input{""};
+  std::cin >> game_input;
+  return game_input;
+}
 
 void Game::add_text(const std::string &text, std::string &result) {
   for(auto &text_char: text) {
