@@ -20,6 +20,10 @@ Game::Game()
   random_words = get_random_words();
   text_walls = set_text_walls();
   std::cout << text_walls;
+  handle_input_flow();
+};
+
+void Game::handle_input_flow() {
   std::string game_input {get_game_input()};
   while(game_input != "exit") {
     if(std::count(random_words.cbegin(), random_words.cend(), game_input) == 1) {
@@ -33,7 +37,7 @@ Game::Game()
     }
   }
   std::cout << "Ending game and returning to the main menu." << std::endl;
-};
+}
 
 std::string Game::get_game_input() {
   std::cout << "Please enter a word, or exit to go back to the main menu." << std::endl;
