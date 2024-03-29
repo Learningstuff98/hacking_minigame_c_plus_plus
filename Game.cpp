@@ -18,6 +18,7 @@ Game::Game()
     "FAME", "SLAM", "DUMB", "DOOR"
   } {
   random_words = get_random_words();
+  password = random_words[generate_random_number(5)];
   text_walls = set_text_walls();
   std::cout << text_walls;
   handle_input_flow();
