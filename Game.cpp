@@ -29,7 +29,12 @@ void Game::handle_input_flow() {
   while(game_input != "exit") {
     if(std::count(random_words.cbegin(), random_words.cend(), game_input) == 1) {
       std::cout << text_walls << std::endl;
-      std::cout << game_input << " is a valid word for entry." << std::endl;
+      if(game_input == password) {
+        std::cout << "You've hacked the terminal!" << std::endl;
+        break;
+      } else {
+        std::cout << "Wrong word. Try again." << std::endl;
+      }
       game_input = get_game_input();
     } else {
       std::cout << text_walls << std::endl;
