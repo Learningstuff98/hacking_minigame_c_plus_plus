@@ -18,9 +18,39 @@ Game::Game()
     "FAME", "SLAM", "DUMB", "DOOR"
   } {
   random_words = get_random_words();
+  password = random_words[generate_random_number(5)];
   text_walls = set_text_walls();
   std::cout << text_walls;
+  handle_input_flow();
 };
+
+void Game::handle_input_flow() {
+  std::string game_input {get_game_input()};
+  while(game_input != "exit") {
+    if(std::count(random_words.cbegin(), random_words.cend(), game_input) == 1) {
+      std::cout << text_walls << std::endl;
+      if(game_input == password) {
+        std::cout << "You've hacked the terminal!" << std::endl;
+        break;
+      } else {
+        std::cout << "Wrong word. Try again." << std::endl;
+      }
+      game_input = get_game_input();
+    } else {
+      std::cout << text_walls << std::endl;
+      std::cout << "ERROR! ERROR! INVALID SELECTION!" << std::endl;
+      game_input = get_game_input();
+    }
+  }
+  std::cout << "Ending game and returning to the main menu." << std::endl;
+}
+
+std::string Game::get_game_input() {
+  std::cout << "Please enter a word, or exit to go back to the main menu." << std::endl;
+  std::string game_input{""};
+  std::cin >> game_input;
+  return game_input;
+}
 
 void Game::add_text(const std::string &text, std::string &result) {
   for(auto &text_char: text) {

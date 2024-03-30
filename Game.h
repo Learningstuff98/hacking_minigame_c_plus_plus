@@ -8,8 +8,11 @@ class Game {
   char characters [22];
   std::string possible_words [18];
   std::string text_walls;
+  std::string password;
   std::string set_text_walls();
+  std::string get_game_input();
   void add_text(const std::string &text, std::string &result);
+  void handle_input_flow();
   int generate_random_number(const int distribution_end);
   std::vector<std::string> get_random_words();
 
