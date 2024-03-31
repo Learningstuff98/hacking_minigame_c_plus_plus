@@ -32,11 +32,13 @@ void Game::handle_input_flow() {
       if(game_input == password) {
         std::cout << "You've hacked the terminal!" << std::endl;
         break;
+      } else if(out_of_tries()) {
+        std::cout << "Yov've been locked out. Returning to the main menu." << std::endl;
+        break;
       } else {
-        if(out_of_tries()) { break; }
         std::cout << "Wrong word. Try again." << std::endl;
+        game_input = get_game_input();
       }
-      game_input = get_game_input();
     } else {
       std::cout << text_walls << std::endl;
       std::cout << "ERROR! ERROR! INVALID SELECTION!" << std::endl;
@@ -45,8 +47,6 @@ void Game::handle_input_flow() {
   }
   if(tries_left > 0) {
     std::cout << "Ending game and returning to the main menu." << std::endl;
-  } else {
-    std::cout << "Yov've been locked out. Returning to the main menu." << std::endl;
   }
 }
 
