@@ -16,7 +16,7 @@ Game::Game()
     "FOUR", "FIVE", "NINE", "FUZZ", "QUIZ", "BUZZ", "STOP",
     "RAIN", "CANE", "JOKE", "COZY", "WALK", "TALK", "ZINC",
     "FAME", "SLAM", "DUMB", "DOOR"
-  } {
+  }, tries_left {3} {
   random_words = get_random_words();
   password = random_words[generate_random_number(5)];
   text_walls = set_text_walls();
@@ -45,7 +45,16 @@ void Game::handle_input_flow() {
   std::cout << "Ending game and returning to the main menu." << std::endl;
 }
 
+void Game::display_remaining_tries() {
+  std::cout << "Tries left: ";
+  for(int i {1}; i <= tries_left; i++) {
+    std::cout << "* ";
+  }
+  std::cout << std::endl;
+}
+
 std::string Game::get_game_input() {
+  display_remaining_tries();
   std::cout << "Please enter a word, or exit to go back to the main menu." << std::endl;
   std::string game_input{""};
   std::cin >> game_input;

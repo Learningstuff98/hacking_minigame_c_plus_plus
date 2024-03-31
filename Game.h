@@ -9,6 +9,8 @@ class Game {
   std::string possible_words [18];
   std::string text_walls;
   std::string password;
+  int tries_left;
+  void display_remaining_tries();
   std::string set_text_walls();
   std::string get_game_input();
   void add_text(const std::string &text, std::string &result);
