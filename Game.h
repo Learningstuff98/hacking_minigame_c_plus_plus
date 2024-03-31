@@ -11,6 +11,7 @@ class Game {
   std::string password;
   int tries_left;
   void display_remaining_tries();
+  bool out_of_tries();
   std::string set_text_walls();
   std::string get_game_input();
   void add_text(const std::string &text, std::string &result);
