@@ -27,13 +27,13 @@ Game::Game()
 void Game::handle_input_flow() {
   std::string game_input {get_game_input()};
   while(game_input != "exit") {
-    if(std::count(random_words.cbegin(), random_words.cend(), game_input) == 1) {
+    if(is_valid_input(game_input)) {
       std::cout << text_walls << std::endl;
       if(game_input == password) {
         std::cout << "You've hacked the terminal!" << std::endl;
         break;
       } else if(out_of_tries()) {
-        std::cout << "Yov've been locked out. Returning to the main menu." << std::endl;
+        std::cout << "You've been locked out. Returning to the main menu." << std::endl;
         break;
       } else {
         std::cout << "Wrong word. Try again." << std::endl;
@@ -41,13 +41,17 @@ void Game::handle_input_flow() {
       }
     } else {
       std::cout << text_walls << std::endl;
-      std::cout << "ERROR! ERROR! INVALID SELECTION!" << std::endl;
+      std::cout << "ERROR! ERROR! INVALID INPUT!" << std::endl;
       game_input = get_game_input();
     }
   }
   if(tries_left > 0) {
     std::cout << "Ending game and returning to the main menu." << std::endl;
   }
+}
+
+bool Game::is_valid_input(const std::string &game_input) {
+  return std::count(random_words.cbegin(), random_words.cend(), game_input) == 1;
 }
 
 bool Game::out_of_tries() {

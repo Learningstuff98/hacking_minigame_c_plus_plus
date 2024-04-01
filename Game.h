@@ -12,6 +12,7 @@ class Game {
   int tries_left;
   void display_remaining_tries();
   bool out_of_tries();
+  bool is_valid_input(const std::string &game_input);
   std::string set_text_walls();
   std::string get_game_input();
   void add_text(const std::string &text, std::string &result);
