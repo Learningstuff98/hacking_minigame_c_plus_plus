@@ -36,6 +36,8 @@ void Game::handle_input_flow() {
         std::cout << "You've been locked out. Returning to the main menu." << std::endl;
         break;
       } else {
+        attempted_words.push_back(game_input);
+        render_attempted_words();
         std::cout << "Wrong word. Try again." << std::endl;
         game_input = get_game_input();
       }
@@ -48,6 +50,26 @@ void Game::handle_input_flow() {
   if(tries_left > 0) {
     std::cout << "Ending game and returning to the main menu." << std::endl;
   }
+}
+
+void Game::render_attempted_words() {
+  for(auto const &attempted_word: attempted_words) {
+    std::cout << "---------------" << std::endl;
+    std::cout << attempted_word << std::endl;
+    std::cout << "Entry denied." << std::endl;
+    std::cout << "Likeness=" << get_likeness(attempted_word) << std::endl;
+    std::cout << "---------------" << std::endl;
+  }
+}
+
+int Game::get_likeness(std::string const &attempted_word) {
+  int char_match {0};
+  for(size_t i {0}; i < attempted_word.size(); i++) {
+    if(attempted_word[i] == password[i]) {
+      char_match++;
+    }
+  }
+  return char_match;
 }
 
 bool Game::is_valid_input(const std::string &game_input) {

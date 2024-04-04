@@ -4,6 +4,9 @@
 
 class Game {
   std::vector<std::string> random_words;
+  std::vector<std::string> attempted_words;
+  void render_attempted_words();
+  int get_likeness(std::string const &attempted_word);
   int possible_word_coordinates [3][6][2];
   char characters [22];
   std::string possible_words [18];
