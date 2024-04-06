@@ -16,7 +16,7 @@ Game::Game()
     "FOUR", "FIVE", "NINE", "FUZZ", "QUIZ", "BUZZ", "STOP",
     "RAIN", "CANE", "JOKE", "COZY", "WALK", "TALK", "ZINC",
     "FAME", "SLAM", "DUMB", "DOOR"
-  } {
+  }, tries_left {3} {
   random_words = get_random_words();
   password = random_words[generate_random_number(5)];
   text_walls = set_text_walls();
@@ -27,25 +27,70 @@ Game::Game()
 void Game::handle_input_flow() {
   std::string game_input {get_game_input()};
   while(game_input != "exit") {
-    if(std::count(random_words.cbegin(), random_words.cend(), game_input) == 1) {
+    if(is_valid_input(game_input)) {
       std::cout << text_walls << std::endl;
       if(game_input == password) {
         std::cout << "You've hacked the terminal!" << std::endl;
         break;
+      } else if(out_of_tries()) {
+        std::cout << "You've been locked out. Returning to the main menu." << std::endl;
+        break;
       } else {
+        attempted_words.push_back(game_input);
+        render_attempted_words();
         std::cout << "Wrong word. Try again." << std::endl;
+        game_input = get_game_input();
       }
-      game_input = get_game_input();
     } else {
       std::cout << text_walls << std::endl;
-      std::cout << "ERROR! ERROR! INVALID SELECTION!" << std::endl;
+      std::cout << "ERROR! ERROR! INVALID INPUT!" << std::endl;
       game_input = get_game_input();
     }
   }
-  std::cout << "Ending game and returning to the main menu." << std::endl;
+  if(tries_left > 0) {
+    std::cout << "Ending game and returning to the main menu." << std::endl;
+  }
+}
+
+void Game::render_attempted_words() {
+  for(auto const &attempted_word: attempted_words) {
+    std::cout << "---------------" << std::endl;
+    std::cout << attempted_word << std::endl;
+    std::cout << "Entry denied." << std::endl;
+    std::cout << "Likeness=" << get_likeness(attempted_word) << std::endl;
+    std::cout << "---------------" << std::endl;
+  }
+}
+
+int Game::get_likeness(std::string const &attempted_word) {
+  int char_match {0};
+  for(size_t i {0}; i < attempted_word.size(); i++) {
+    if(attempted_word[i] == password[i]) {
+      char_match++;
+    }
+  }
+  return char_match;
+}
+
+bool Game::is_valid_input(const std::string &game_input) {
+  return std::count(random_words.cbegin(), random_words.cend(), game_input) == 1;
+}
+
+bool Game::out_of_tries() {
+  tries_left -= 1;
+  return tries_left == 0;
+}
+
+void Game::display_remaining_tries() {
+  std::cout << "Tries left: ";
+  for(int i {1}; i <= tries_left; i++) {
+    std::cout << "* ";
+  }
+  std::cout << std::endl;
 }
 
 std::string Game::get_game_input() {
+  display_remaining_tries();
   std::cout << "Please enter a word, or exit to go back to the main menu." << std::endl;
   std::string game_input{""};
   std::cin >> game_input;
